@@ -5,7 +5,13 @@
  */
 function render(header,reply)
 {
-    return reply.view('views/index', {title:'Home Page'});
+    return new Promise(async function(resolve,reject)
+    {
+        console.log(await fw.db.execute('local','SELECT * from Department'));
+        console.log('hola');
+        resolve(reply.view('views/index', {title:'Home Page'}));
+    });
+    
 }
 
 module.exports = 

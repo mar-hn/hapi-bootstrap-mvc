@@ -1,12 +1,12 @@
 'use strict';
 
 require('./fw');
+require('dotenv').config();
 const Hapi  = require('hapi');
-// const routesModule = require('./routes.js');      
 
 const server = new Hapi.Server({
-    port:3030,
-    host:'localhost'
+    port: process.env.PORT || 3030,
+    host: process.env.HOST || 'localhost'
 });
 
 function getRoutes()
@@ -53,11 +53,11 @@ async function start(){
     })
     
 
-
     try
     {
         await server.start();
         console.log(`Server is running on Port ${server.info.uri}`);
+        console.log(`Enviroment: ${process.env.NODE_ENV || 'development'}`);
     }
     catch(error){
         console.log(error);
