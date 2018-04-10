@@ -27,12 +27,14 @@ async function start(){
 
     console.log('Starting...');
 
+    await server.register(require('vision'));
+    await server.register(require('inert'));
+
+
     for(let route of getRoutes())
     {
         server.route(route);
     }
-
-    await server.register(require('vision'));
 
     server.views({
         engines: 
@@ -56,7 +58,7 @@ async function start(){
     try
     {
         await server.start();
-        console.log(`Server is running on Port ${server.info.uri}`);
+        console.log(`Server is running on ${server.info.uri}`);
         console.log(`Enviroment: ${process.env.NODE_ENV || 'development'}`);
     }
     catch(error){
