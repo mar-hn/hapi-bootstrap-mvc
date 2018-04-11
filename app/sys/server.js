@@ -48,11 +48,18 @@ async function start(){
         relativeTo: __dirname,
         compileMode: 'async',
         path: '../templates',
-        layout: 'default',
+        layout: 'default.layout',
         partialsPath: '../templates/views',
         layoutPath: '../templates/layouts',
         helpersPath: '../templates/helpers'
-    })
+    });
+
+    server.ext('onRequest', function (request, reply) 
+    {
+        console.log(request)
+        console.log('onRequest()');
+        return reply.continue;
+    });
     
 
     try
