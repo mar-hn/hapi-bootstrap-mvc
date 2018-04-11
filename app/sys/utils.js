@@ -1,5 +1,11 @@
 const fs = require('fs');
 const glob = require('glob');
+const uuid = require('uuid/v1');
+
+function getUUID()
+{
+    return uuid();
+}
 
 function getFiles(path, realpath) {
     return glob.sync(path, {
@@ -56,7 +62,7 @@ function isUndefined(arg) {
 };
 
 module.exports = {
-    // getDependencies: getDependencies,
+    getUUID: getUUID,
     getFiles: getFiles,
     loadFiles: loadFiles,
     isFile: isFile,

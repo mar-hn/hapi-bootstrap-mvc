@@ -27,49 +27,62 @@ async function start(){
 
     console.log('Starting...');
 
-    await server.register(require('vision'));
-    await server.register(require('inert'));
-
-
-    for(let route of getRoutes())
+    try 
     {
-        server.route(route);
-    }
 
-    server.views({
-        engines: 
+        // Plugin Vision
+        await server.register(require('vision'));
+        // Plugin inert
+        await server.register(require('inert'));
+
+        await server.register(require('hapi-auth-cookie'));
+        
+        // Cache
+        fw.cache = server.cache({ segment: 'sessions', expiresIn: 3 * 24 * 60 * 60 * 1000 });
+        server.app.cache = fw.cache;
+
+        // Auth Cookie
+        server.auth.strategy('session', 'cookie',  
         {
-            hbs: 
+            password: 'somecrazycookiesecretthatcantbeguesseswouldgohere', // cookie secret
+            redirectTo: '/login',
+            cookie: 'jsid', // Cookie name
+            isSecure: false, // required for non-https applications
+            ttl: 24 * 60 * 60 * 1000,
+            validateFunc: await fw.getController('security').validate
+        });
+        server.auth.default('session');
+
+
+        for(let route of getRoutes())
+        {
+            server.route(route);
+        }
+
+        server.views({
+            engines: 
             {
-                module: require('handlebars'),
-                compileMode: 'sync' // engine specific
-            }
-        },
-        relativeTo: __dirname,
-        compileMode: 'async',
-        path: '../templates',
-        layout: 'default.layout',
-        partialsPath: '../templates/views',
-        layoutPath: '../templates/layouts',
-        helpersPath: '../templates/helpers'
-    });
-
-    server.ext('onRequest', function (request, reply) 
-    {
-        console.log(request)
-        console.log('onRequest()');
-        return reply.continue;
-    });
-    
-
-    try
-    {
+                hbs: 
+                {
+                    module: require('handlebars'),
+                    compileMode: 'sync' // engine specific
+                }
+            },
+            relativeTo: __dirname,
+            compileMode: 'async',
+            path: '../templates',
+            layout: 'default.layout',
+            partialsPath: '../templates/partials',
+            layoutPath: '../templates/layouts',
+            helpersPath: '../templates/helpers'
+        });
+        // Start server
         await server.start();
         console.log(`Server is running on ${server.info.uri}`);
         console.log(`Enviroment: ${process.env.NODE_ENV || 'development'}`);
     }
     catch(error){
-        console.log(error);
+        console.error(error);
     }
     
     

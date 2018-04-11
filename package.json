@@ -18,6 +18,7 @@
     "handlebars": "^4.0.11",
     "hapi": "^17.2.0",
     "hapi-auth-basic": "^5.0.0",
+    "hapi-auth-cookie": "^8.1.0",
     "inert": "^5.1.0",
     "joi": "^13.1.2",
     "lodash": "^4.17.5",
@@ -25,6 +26,7 @@
     "oracledb": "^2.2.0",
     "promise-mysql": "^3.2.1",
     "simple-oracledb": "^1.1.90",
+    "uuid": "^3.2.1",
     "vision": "^5.3.1"
   },
   "devDependencies": {

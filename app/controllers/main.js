@@ -1,15 +1,13 @@
 /**
  * Render page
- * @param {Object} header
- * @param {Object} reply 
+ * @param {Object} request
+ * @param {Object} h 
  */
-function render(header,reply)
+function render(request,h)
 {
     return new Promise(async function(resolve,reject)
     {
-        // console.log(await fw.db.execute('local','SELECT * from Department'));
-        // console.log('hola');
-        resolve(reply.view('views/index', {title:'Home Page'}));
+        resolve(h.view('views/index', {title:'Home Page'}));
     });
     
 }

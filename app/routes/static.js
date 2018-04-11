@@ -9,6 +9,11 @@ module.exports =
             path: `${__dirname}/../assets`,
             index: false
         }
+    },
+    options:
+    {
+        auth: { mode: 'try' },
+        plugins: { 'hapi-auth-cookie': { redirectTo: false } }
     }
- } 
+ }
 ];
