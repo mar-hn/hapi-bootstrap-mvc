@@ -2,7 +2,7 @@ const fs = require('fs');
 const glob = require('glob');
 const uuid = require('uuid/v1');
 const crypto = require('crypto');
-
+const dateformat = require('dateformat');
 
 function getMD5(data)
 {

@@ -31,9 +31,18 @@ function getUsers()
     });
 }
 
+function getUser(id)
+{
+    return new Promise(async function(resolve,reject)
+    {
+        resolve(await userDAO.getUser(id));
+    });
+}
+
 
 module.exports = 
 {
-    validLogin:validLogin,
-    getUsers:getUsers
+    validLogin,
+    getUsers,
+    getUser
 }
