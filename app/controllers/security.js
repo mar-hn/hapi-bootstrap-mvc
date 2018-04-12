@@ -4,14 +4,15 @@ async function validate(request, session)
     const out = {
         valid: !!cached
     };
-
+    
     if (out.valid) {
-        out.credentials = cached.account;
+        out.credentials = cached;
     }
 
     return out;
 }
 
-module.exports = {
+module.exports = 
+{
     validate : validate
 }

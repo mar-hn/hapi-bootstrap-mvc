@@ -58,13 +58,15 @@ async function start(){
         {
             server.route(route);
         }
-
+        
+        fw.Handlebars = require('handlebars');
+        
         server.views({
             engines: 
             {
                 hbs: 
                 {
-                    module: require('handlebars'),
+                    module: fw.Handlebars,
                     compileMode: 'sync' // engine specific
                 }
             },
@@ -76,6 +78,7 @@ async function start(){
             layoutPath: '../templates/layouts',
             helpersPath: '../templates/helpers'
         });
+        
         // Start server
         await server.start();
         console.log(`Server is running on ${server.info.uri}`);

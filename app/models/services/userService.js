@@ -23,8 +23,17 @@ function validLogin(email, password)
     })
 }
 
+function getUsers()
+{
+    return new Promise(async function(resolve,reject)
+    {
+        resolve(await userDAO.getUsers());
+    });
+}
+
 
 module.exports = 
 {
-    validLogin:validLogin
+    validLogin:validLogin,
+    getUsers:getUsers
 }

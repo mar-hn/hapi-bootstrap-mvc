@@ -17,7 +17,20 @@ function getUserbyEmail(email)
     });
 }
 
+function getUsers()
+{
+    return new Promise(async function(resolve,reject)
+    {
+        const SQL = 
+        `SELECT Users.*, Department.Name as 'Department', Roles.Role FROM Users
+        INNER JOIN Roles ON Users.RoleId = Roles.ID
+        INNER JOIN Department ON Users.DepartmentId = Department.ID`;
+        resolve(await fw.db.execute('local',SQL));
+    });
+}
+
 module.exports = 
 {
-    getUserbyEmail: getUserbyEmail
+    getUserbyEmail: getUserbyEmail,
+    getUsers:getUsers
 }

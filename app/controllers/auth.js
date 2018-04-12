@@ -43,7 +43,12 @@ function login(request,h)
             //Create UUID
             const jsid = fw.utils.getUUID();
             // Save data to session
-            await request.server.app.cache.set(jsid, { userAccount:Account }, 0);
+            const serverSession = 
+            {
+                userAccount:Account, 
+                jsid : jsid
+            }
+            await request.server.app.cache.set(jsid, serverSession , 0);
             // Set Cookie
             request.cookieAuth.set({ jsid });                        
         }
