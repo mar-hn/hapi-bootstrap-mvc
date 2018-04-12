@@ -11,7 +11,7 @@ module.exports =
         } 
     },
     { 
-        method: 'GET', path: '/auth', options: 
+        method: 'POST', path: '/auth', options: 
         { 
             handler: loginCtrl.login, 
             auth: { mode: 'try' }, 

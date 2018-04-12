@@ -1,6 +1,13 @@
 const fs = require('fs');
 const glob = require('glob');
 const uuid = require('uuid/v1');
+const crypto = require('crypto');
+
+
+function getMD5(data)
+{
+    return crypto.createHash('md5').update(data).digest("hex");
+}
 
 function getUUID()
 {
@@ -62,6 +69,7 @@ function isUndefined(arg) {
 };
 
 module.exports = {
+    getMD5:getMD5,
     getUUID: getUUID,
     getFiles: getFiles,
     loadFiles: loadFiles,
