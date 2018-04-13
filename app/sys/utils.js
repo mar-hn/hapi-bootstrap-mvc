@@ -69,17 +69,18 @@ function isUndefined(arg) {
 };
 
 module.exports = {
-    getMD5:getMD5,
-    getUUID: getUUID,
-    getFiles: getFiles,
-    loadFiles: loadFiles,
-    isFile: isFile,
-    isDirectory: isDirectory,
-    isArray: isArray,
-    isObject: isObject,
-    isString: isString,
-    isFunction: isFunction,
-    isPromise: isPromise,
-    isDefined: isDefined,
-    isUndefined: isUndefined
+    getMD5,
+    getUUID,
+    getFiles,
+    loadFiles,
+    isFile,
+    isDirectory,
+    isArray,
+    isObject,
+    isString,
+    isFunction,
+    isPromise,
+    isDefined,
+    isUndefined,
+    dateformat
 };

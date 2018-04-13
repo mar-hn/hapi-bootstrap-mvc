@@ -31,6 +31,14 @@ function getUsers()
     });
 }
 
+function getUserbyEmail(email)
+{
+    return new Promise(async function(resolve,reject)
+    {
+        resolve(await userDAO.getUserbyEmail(email));
+    });
+}
+
 function getUser(id)
 {
     return new Promise(async function(resolve,reject)
@@ -39,10 +47,39 @@ function getUser(id)
     });
 }
 
+function addUser(data)
+{
+    return new Promise(async function(resolve,reject)
+    {
+        resolve(await userDAO.addUser(data));
+    });    
+}
+
+function updateUser(data)
+{
+    return new Promise(async function(resolve,reject)
+    {
+        resolve(await userDAO.updateUser(data));
+    });    
+}
+
+function deleteUser(data)
+{
+    return new Promise(async function(resolve,reject)
+    {
+        resolve(await userDAO.deleteUser(data));
+    });    
+}
+
+
 
 module.exports = 
 {
     validLogin,
     getUsers,
-    getUser
+    getUser,
+    getUserbyEmail,
+    addUser,
+    updateUser,
+    deleteUser
 }
