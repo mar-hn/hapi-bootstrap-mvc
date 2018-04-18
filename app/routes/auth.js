@@ -15,7 +15,8 @@ module.exports =
         { 
             handler: loginCtrl.login, 
             auth: { mode: 'try' }, 
-            plugins: { 'hapi-auth-cookie': { redirectTo: false } }
+            plugins: { 'hapi-auth-cookie': { redirectTo: false } },
+            tags: ['api']
         } 
     },
     { 

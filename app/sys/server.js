@@ -23,6 +23,21 @@ function getRoutes()
     return routes;
 }
 
+function getPlugins() 
+{
+    let pluginsPaths = fw.utils.getFiles('sys/Plugins/**/*.js', true);
+    let plugins = [];
+
+    if (fw.utils.isArray(pluginsPaths)) 
+    {
+        for (let p of pluginsPaths)
+            plugins.push(require(p));
+    }
+
+    return plugins;
+}
+
+
 async function start(){
 
     console.log('Starting...');
@@ -36,6 +51,12 @@ async function start(){
         await server.register(require('inert'));
 
         await server.register(require('hapi-auth-cookie'));
+
+        //await require('./src/plugins/hapi-swagger')(server)
+
+        console.log(getPlugins());
+        for (let plugin of getPlugins())
+            await plugin(server);
         
         // Cache
         fw.cache = server.cache({ segment: 'sessions', expiresIn: 3 * 24 * 60 * 60 * 1000 });
