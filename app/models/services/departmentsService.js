@@ -8,7 +8,7 @@ const departmentsDAO = fw.getDAO('departments');
 //====================
 function getDepartments()
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await departmentsDAO.getDepartments());
     });

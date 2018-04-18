@@ -12,7 +12,7 @@ const departmentsService = fw.getService('departments');
  */
 function renderMain(request,h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const users = await usersService.getUsers();
         resolve(h.view('views/users/main', {users, session: request.auth.credentials}));
@@ -26,7 +26,7 @@ function renderMain(request,h)
  */
 function renderView(request,h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const user = await usersService.getUser(request.query.id);
         
@@ -48,7 +48,7 @@ function renderView(request,h)
  */
 function renderEdit(request,h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const user = await usersService.getUser(request.query.id);
         
@@ -76,7 +76,7 @@ function renderEdit(request,h)
  */
 function renderAdd(request,h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(h.view('views/users/add', 
         {
@@ -91,7 +91,7 @@ function renderAdd(request,h)
 
 function addUser(request, h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         let stResponse = {success:false,message:''};
         const user = await usersService.getUserbyEmail(request.payload.email);
@@ -127,7 +127,7 @@ function addUser(request, h)
 
 function editUser(request, h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         let stResponse = {success:false,message:''};
         const user = await usersService.getUser(request.payload.userid);
@@ -168,7 +168,7 @@ function editUser(request, h)
 
 function deleteUser(request, h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         let stResponse = {success:false,message:''};
         const user = await usersService.getUser(request.payload.userid);

@@ -8,7 +8,7 @@ const rolesDAO = fw.getDAO('roles');
 //====================
 function getRoles()
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await rolesDAO.getRoles());
     });

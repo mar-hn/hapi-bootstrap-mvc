@@ -16,7 +16,15 @@ module.exports =
             handler: loginCtrl.login, 
             auth: { mode: 'try' }, 
             plugins: { 'hapi-auth-cookie': { redirectTo: false } },
-            tags: ['api']
+            tags: ['api'],
+            validate: 
+            {
+                payload: 
+                {
+                    email: fw.param.string().required(),
+                    password: fw.param.string().required()
+                }
+            }
         } 
     },
     { 

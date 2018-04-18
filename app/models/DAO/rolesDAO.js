@@ -8,7 +8,7 @@
 //====================
 function getRoles()
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
         `SELECT * FROM Roles`;

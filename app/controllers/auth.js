@@ -20,7 +20,7 @@ function render(request, h)
 
 function login(request,h)
 {
-    return new Promise(async function (resolve, reject) 
+    return fw.promise(async (resolve,reject) => 
     {
         let stResponse = {success:false,message:''};
         
@@ -54,7 +54,7 @@ function login(request,h)
         }
 
         // Return response
-        resolve(stResponse);        
+        resolve(stResponse);
     });
 }
 

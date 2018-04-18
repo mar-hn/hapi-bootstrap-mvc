@@ -8,7 +8,7 @@ const userDAO = fw.getDAO('user');
 //====================
 function validLogin(email, password)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         let Account = await userDAO.getUserbyEmail(email);
         
@@ -25,7 +25,7 @@ function validLogin(email, password)
 
 function getUsers()
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.getUsers());
     });
@@ -33,7 +33,7 @@ function getUsers()
 
 function getUserbyEmail(email)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.getUserbyEmail(email));
     });
@@ -41,7 +41,7 @@ function getUserbyEmail(email)
 
 function getUser(id)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.getUser(id));
     });
@@ -49,7 +49,7 @@ function getUser(id)
 
 function addUser(data)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.addUser(data));
     });    
@@ -57,7 +57,7 @@ function addUser(data)
 
 function updateUser(data)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.updateUser(data));
     });    
@@ -65,7 +65,7 @@ function updateUser(data)
 
 function deleteUser(data)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(await userDAO.deleteUser(data));
     });    

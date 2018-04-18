@@ -43,42 +43,12 @@ async function start(){
     console.log('Starting...');
 
     try 
-    {
-
-        // Plugin Vision
-        await server.register(require('vision'));
-        // Plugin inert
-        await server.register(require('inert'));
-
-        await server.register(require('hapi-auth-cookie'));
-
-        //await require('./src/plugins/hapi-swagger')(server)
-
-        console.log(getPlugins());
+    {        
         for (let plugin of getPlugins())
             await plugin(server);
-        
-        // Cache
-        fw.cache = server.cache({ segment: 'sessions', expiresIn: 3 * 24 * 60 * 60 * 1000 });
-        server.app.cache = fw.cache;
-
-        // Auth Cookie
-        server.auth.strategy('session', 'cookie',  
-        {
-            password: 'somecrazycookiesecretthatcantbeguesseswouldgohere', // cookie secret
-            redirectTo: '/login',
-            cookie: 'jsid', // Cookie name
-            isSecure: false, // required for non-https applications
-            ttl: 24 * 60 * 60 * 1000,
-            validateFunc: await fw.getController('security').validate
-        });
-        server.auth.default('session');
-
 
         for(let route of getRoutes())
-        {
             server.route(route);
-        }
         
         fw.Handlebars = require('handlebars');
         

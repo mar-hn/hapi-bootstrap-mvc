@@ -8,7 +8,7 @@
 //====================
 function getUsers()
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
         `SELECT Users.*, Department.Name as 'Department', Roles.Role FROM Users
@@ -20,7 +20,7 @@ function getUsers()
 
 function getUser(id)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
         `SELECT Users.*, Department.Name as 'Department', Roles.Role FROM Users
@@ -33,7 +33,7 @@ function getUser(id)
 
 function getUserbyEmail(email)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
         `SELECT * FROM Users
@@ -44,7 +44,7 @@ function getUserbyEmail(email)
 
 function addUser(data)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
         `INSERT INTO Users(Name,Salary,StartingDate,Email,Password,DepartmentId,RoleId,Salt)
@@ -66,7 +66,7 @@ function addUser(data)
 
 function updateUser(data)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
         `UPDATE Users
@@ -90,7 +90,7 @@ function updateUser(data)
 
 function deleteUser(id)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         const SQL = 
         `DELETE FROM Users

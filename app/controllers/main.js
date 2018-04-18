@@ -5,7 +5,7 @@
  */
 function render(request,h)
 {
-    return new Promise(async function(resolve,reject)
+    return fw.promise(async (resolve,reject) => 
     {
         resolve(h.view('views/index', {title:'Home Page'}));
     });
