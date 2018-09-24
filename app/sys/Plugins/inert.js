@@ -1,6 +1,12 @@
+/**
+ * File: hapi-inert.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: Static file and directory handlers for HapiJS
+ */
 'use strict';
 
-exports = module.exports = async (server) => 
+module.exports = async (server) => 
 {
     try 
     {

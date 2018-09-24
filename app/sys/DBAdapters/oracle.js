@@ -1,3 +1,10 @@
+/**
+ * File: oracle.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: Oracle Adapter, Handles connections made to oracle databases
+ */
+
 class oracleAdapter 
 {
     constructor(config)

@@ -5,6 +5,9 @@ const usersService = fw.getService('user');
 const rolesService = fw.getService('roles');
 const departmentsService = fw.getService('departments');
 
+//====================
+// Methods
+//====================
 /**
  * Render Main page
  * @param {Object} request

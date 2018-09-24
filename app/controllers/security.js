@@ -1,3 +1,11 @@
+//====================
+// Dependencies
+//====================
+// None
+
+//====================
+// Methods
+//====================
 async function validate(request, session)
 {
     const cached = await fw.cache.get(session.jsid);

@@ -1,3 +1,7 @@
+/*
+    Note: In production assets should be served by web server. Ex: Apache/Nginx
+*/
+
 module.exports = 
 [
   { 
@@ -12,8 +16,7 @@ module.exports =
     },
     options:
     {
-        auth: { mode: 'try' },
-        plugins: { 'hapi-auth-cookie': { redirectTo: false } }
+        auth: false
     }
  }
 ];

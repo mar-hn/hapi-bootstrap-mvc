@@ -6,12 +6,9 @@ const departmentsDAO = fw.getDAO('departments');
 //====================
 // Methods
 //====================
-function getDepartments()
+async function getDepartments()
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await departmentsDAO.getDepartments());
-    });
+    return await departmentsDAO.getDepartments();
 }
 
 module.exports =

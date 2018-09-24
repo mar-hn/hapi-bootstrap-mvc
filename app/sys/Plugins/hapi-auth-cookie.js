@@ -1,6 +1,6 @@
 'use strict';
 
-exports = module.exports = async (server) => 
+module.exports = async (server) => 
 {
     try 
     {

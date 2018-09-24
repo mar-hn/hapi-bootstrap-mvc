@@ -1,3 +1,10 @@
+/**
+ * File: mysql.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: MYSQL Adapter, Handles connections made to MYSQL databases
+ */
+
 class mysqlAdapter 
 {
     constructor(config)

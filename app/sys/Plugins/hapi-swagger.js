@@ -1,3 +1,11 @@
+/**
+ * File: hapi-swagger.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: Swagger UI plugin for HapiJS
+ * Dependecies: Inert,Vision plugins
+ */
+
 'use strict';
 const packageInfo = require('../../../package');
 
@@ -9,12 +17,21 @@ const swaggerConfig = {
             title: packageInfo.name,
             version: packageInfo.version
         },
-        auth: 'simple'
+        auth: 'simple',
+        documentationPath: '/documentation',
+        securityDefinitions: {
+            'jwt': {
+                'type': 'apiKey',
+                'name': 'Authorization',
+                'in': 'header'
+            }
+        },
+        security: [{ 'jwt': [] }]        
     }
 };
 
 
-exports = module.exports = async (server) => 
+module.exports = async (server) => 
 {
     try {
         await server.register(swaggerConfig);

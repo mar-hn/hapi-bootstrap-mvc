@@ -1,23 +1,68 @@
+/**
+ * File: server.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: Proyect startup, inits Server instance
+ */
+
 'use strict';
 
 require('./fw');
 require('dotenv').config();
 const Hapi  = require('hapi');
 
-const server = new Hapi.Server({
+fw.server = new Hapi.Server({
     port: process.env.PORT || 3030,
-    host: process.env.HOST || 'localhost'
+    host: process.env.HOST || 'localhost',
+    routes: 
+    {
+        cors: true,
+        // {
+        //     origin: ['http://*.domain.com']
+        // } 
+    },
+    debug: false
+    // debug: 
+    // { 
+    //     request: ['*'],
+    //     log: ['*']
+    // }
+    ,
+    cache : [{
+            engine    : require('catbox-disk'),
+            cachePath: __dirname + '/../../',
+            cleanEvery: 3600000,
+            partition : 'cache'
+    }]        
 });
 
 function getRoutes()
 {
     let routesPaths = fw.utils.getFiles('routes/**/*.js', true);
     let routes = [];
+    let index = 0;
 
     if(fw.utils.isArray(routesPaths))
     {
         for(let r of routesPaths )
             routes.push(require(r));
+    }
+
+    for(let r of routes )
+    {        
+        if(!fw.utils.isObject(r) || fw.lodash.isEmpty(r))
+            throw "Invalid route definition in "+routesPaths[index];
+
+        // Force all routes to display in swagger
+        // for(let rx of r)
+        // {
+        //     if( fw.utils.isArray() )
+        //         rx.options.tags.push('api');
+        //     else
+        //         rx.options.tags = ['api']
+        // }
+
+        index++;
     }
 
     return routes;
@@ -45,14 +90,14 @@ async function start(){
     try 
     {        
         for (let plugin of getPlugins())
-            await plugin(server);
+            await plugin(fw.server);
 
         for(let route of getRoutes())
-            server.route(route);
-        
+            fw.server.route(route);
+
         fw.Handlebars = require('handlebars');
-        
-        server.views({
+    
+        fw.server.views({
             engines: 
             {
                 hbs: 
@@ -68,18 +113,18 @@ async function start(){
             partialsPath: '../templates/partials',
             layoutPath: '../templates/layouts',
             helpersPath: '../templates/helpers'
-        });
+        });            
         
         // Start server
-        await server.start();
-        console.log(`Server is running on ${server.info.uri}`);
-        console.log(`Enviroment: ${process.env.NODE_ENV || 'development'}`);
+        await fw.server.start();
+        console.log(`Server is running on ${fw.server.info.uri}`);
+        console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
     }
-    catch(error){
+    catch(error)
+    {        
         console.error(error);
+        throw(error);
     }
-    
-    
 }
 
 start();

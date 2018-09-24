@@ -6,12 +6,9 @@ const rolesDAO = fw.getDAO('roles');
 //====================
 // Methods
 //====================
-function getRoles()
+async function getRoles()
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await rolesDAO.getRoles());
-    });
+    return await rolesDAO.getRoles();
 }
 
 module.exports =

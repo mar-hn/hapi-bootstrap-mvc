@@ -1,6 +1,12 @@
+/**
+ * File: hapi-vision.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: Templates rendering support for hapiJS
+ */
 'use strict';
 
-exports = module.exports = async (server) => 
+module.exports = async (server) => 
 {
     try 
     {

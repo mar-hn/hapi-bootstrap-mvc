@@ -6,15 +6,12 @@
 //====================
 // Methods
 //====================
-function getRoles()
+async function getRoles()
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        const SQL = 
-        `SELECT * FROM Roles`;
-        
-        resolve(await fw.db.execute('local',SQL));
-    });
+    const SQL = 
+    `SELECT * FROM Roles`;
+    
+    return await fw.db.execute('local',SQL);
 }
 
 module.exports = 

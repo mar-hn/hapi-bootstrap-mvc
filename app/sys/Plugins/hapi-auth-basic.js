@@ -1,8 +1,16 @@
+/**
+ * File: hapi-auth-basic.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: Auth basic plugin for HapiJS
+ */
+
 'use strict';
 
-const devuser = {
-    username: 'newmedia',
-    password: 'unique' 
+const devuser = 
+{
+    username: 'dev',
+    password: 'dev' 
 };
 
 const validate = async (request, username, password, h) => {
@@ -24,7 +32,7 @@ const validate = async (request, username, password, h) => {
 
 };
 
-exports = module.exports = async (server) => 
+module.exports = async (server) => 
 {
     try 
     {

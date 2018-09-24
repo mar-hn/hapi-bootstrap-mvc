@@ -1,3 +1,10 @@
+/**
+ * File: DBManager.js
+ * Author: Mario Nuñez
+ * Version: 1.0
+ * Description: DBManager Class declaration, handles connections to database
+ */
+
 class dbmanager
 {
     constructor()
@@ -7,7 +14,7 @@ class dbmanager
 
     getEnvironment()
     {
-        return process.env.NODE_ENV || 'development';
+        return process.env.NODE_ENV || 'DEV';
     }
 
     getDBConfig()

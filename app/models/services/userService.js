@@ -6,69 +6,48 @@ const userDAO = fw.getDAO('user');
 //====================
 // Methods
 //====================
-function validLogin(email, password)
+async function validLogin(email, password)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        let Account = await userDAO.getUserbyEmail(email);
+    let Account = await userDAO.getUserbyEmail(email);
+    
+    if(Account.length > 0)
+    {        
+        Account = Account[0];
+        if(fw.utils.getMD5(password+Account.Salt) == Account.Password)
+            return Account;
+    }
         
-        if(Account.length > 0)
-        {        
-            Account = Account[0];
-            if(fw.utils.getMD5(password+Account.Salt) == Account.Password)
-                resolve(Account);
-        }
-        
-        resolve(false);
-    })
+    return false;
 }
 
-function getUsers()
+async function getUsers()
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await userDAO.getUsers());
-    });
+    return await userDAO.getUsers();
 }
 
-function getUserbyEmail(email)
+async function getUserbyEmail(email)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await userDAO.getUserbyEmail(email));
-    });
+    return await userDAO.getUserbyEmail(email);
 }
 
-function getUser(id)
+async function getUser(id)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await userDAO.getUser(id));
-    });
+    return await userDAO.getUser(id);
 }
 
-function addUser(data)
+async function addUser(data)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await userDAO.addUser(data));
-    });    
+    return await userDAO.addUser(data);
 }
 
-function updateUser(data)
+async function updateUser(data)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await userDAO.updateUser(data));
-    });    
+    return await userDAO.updateUser(data);
 }
 
-function deleteUser(data)
+async function deleteUser(data)
 {
-    return fw.promise(async (resolve,reject) => 
-    {
-        resolve(await userDAO.deleteUser(data));
-    });    
+    return await userDAO.deleteUser(data);
 }
 
 
